@@ -8,6 +8,17 @@ class InfoMessage:
                  speed: float,
                  calories: float,
                  ) -> None:
+        """
+        Установить атрибуты для объекта.
+
+        Параметры
+        ---------
+        training_type - тип тренировки;
+        duration — длительность тренировки;
+        distance — дистанция, преодолённая за тренировку;
+        speed — средняя скорость движения;
+        calories — потраченные за время тренировки килокалории.
+        """
         self.training_type = training_type
         self.duration = duration
         self.distance = distance
@@ -15,8 +26,7 @@ class InfoMessage:
         self.calories = calories
 
     def get_message(self) -> str:
-        # выводимое сообщение
-        # все значения типа float округляются до 3 знаков после запятой
+        """Вернуть расчитанные значения в нужном формате с округлением."""
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration:.3f} ч.; '
                 f'Дистанция: {self.distance:.3f} км; '
@@ -28,14 +38,27 @@ class Training:
     """Базовый класс тренировки."""
 
     M_IN_KM = 1000
+    """Константа для перевода значений из метров в километры."""
     MIN_IN_HOUR = 60
-    LEN_STEP = 0.65  # Один шаг в метрах
+    """Константа для перевода значений из часов в минуты."""
+    LEN_STEP = 0.65
+    """Расстояние, которое спортсмен преодолевает за один шаг в метрах."""
 
     def __init__(self,
                  action: int,
                  duration: float,
                  weight: float,
                  ) -> None:
+        """
+        Установить атрибуты для объекта.
+
+        Параметры
+        ---------
+        action — основное считываемое действие во время тренировки (шаг — бег,
+        ходьба; гребок — плавание);
+        duration — длительность тренировки;
+        weight — вес спортсмена.
+        """
         self.action = action
         self.duration = duration
         self.weight = weight
@@ -71,6 +94,7 @@ class Running(Training):
                 * self.duration * self.MIN_IN_HOUR)
 
     def __str__(self) -> str:
+        """Получить тип тренировки"""
         return 'Running'
 
 
@@ -83,6 +107,17 @@ class SportsWalking(Training):
                  weight: float,
                  height: float,
                  ) -> None:
+        """
+        Установить атрибуты для объекта.
+
+        Параметры
+        ---------
+        action — основное считываемое действие во время тренировки (шаг — бег,
+        ходьба; гребок — плавание);
+        duration — длительность тренировки;
+        weight — вес спортсмена;
+        height — рост спортсмена.
+        """
         super().__init__(action, duration, weight)
         self.height = height
 
@@ -93,6 +128,7 @@ class SportsWalking(Training):
                 * 0.029 * self.weight) * self.duration * self.MIN_IN_HOUR)
 
     def __str__(self) -> str:
+        """Получить тип тренировки"""
         return 'SportsWalking'
 
 
@@ -107,18 +143,33 @@ class Swimming(Training):
                  length_pool: int,
                  count_pool: int,
                  ) -> None:
+        """
+        Установить атрибуты для объекта.
+
+        Параметры
+        ---------
+        action — основное считываемое действие во время тренировки (шаг — бег,
+        ходьба; гребок — плавание);
+        duration — длительность тренировки;
+        weight — вес спортсмена;
+        length_pool — длина бассейна;
+        count_pool — количество проплытых бассейнов.
+        """
         super().__init__(action, duration, weight)
         self.length_pool = length_pool
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
+        """Получить среднюю скорость движения."""
         return (self.length_pool * self.count_pool
                 / self.M_IN_KM / self.duration)
 
     def get_spent_calories(self) -> float:
+        """Получить количество затраченных калорий."""
         return (self.get_mean_speed() + 1.1) * 2 * self.weight
 
     def __str__(self) -> str:
+        """Получить тип тренировки"""
         return 'Swimming'
 
 
