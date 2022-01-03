@@ -128,7 +128,7 @@ class SportsWalking(Training):
                 * 0.029 * self.weight) * self.duration * self.MIN_IN_HOUR)
 
     def __str__(self) -> str:
-        """Получить тип тренировки"""
+        """Получить тип тренировки."""
         return 'SportsWalking'
 
 
@@ -170,7 +170,7 @@ class Swimming(Training):
         return (self.get_mean_speed() + 1.1) * 2 * self.weight
 
     def __str__(self) -> str:
-        """Получить тип тренировки"""
+        """Получить тип тренировки."""
         return 'Swimming'
 
 
