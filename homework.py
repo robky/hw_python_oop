@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 
 
 @dataclass
@@ -13,11 +13,9 @@ class InfoMessage:
 
     def get_message(self) -> str:
         """Вернуть расчитанные значения в нужном формате с округлением."""
-        return (f'Тип тренировки: {self.training_type}; '
-                f'Длительность: {self.duration:.3f} ч.; '
-                f'Дистанция: {self.distance:.3f} км; '
-                f'Ср. скорость: {self.speed:.3f} км/ч; '
-                f'Потрачено ккал: {self.calories:.3f}.')
+        return ('Тип тренировки: {}; Длительность: {:.3f} ч.; '
+                'Дистанция: {:.3f} км; Ср. скорость: {:.3f} км/ч; '
+                'Потрачено ккал: {:.3f}.'.format(*asdict(self).values()))
 
 
 @dataclass
